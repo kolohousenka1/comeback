@@ -50,8 +50,8 @@ export default function WordInput({ value, onChange, onSubmit, disabled, letterS
             disabled
               ? 'bg-gray-100 border-gray-300 text-gray-500'
               : isValid
-              ? 'border-green-500 focus:border-green-600'
-              : 'border-gray-300 focus:border-purple-500'
+              ? 'border-green-500 focus:border-green-600 text-gray-900'
+              : 'border-gray-300 focus:border-purple-500 text-gray-900'
           }`}
           placeholder={`Word with "${letterSequence}"`}
           maxLength={30}

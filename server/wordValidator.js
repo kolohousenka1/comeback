@@ -8,28 +8,11 @@ class WordValidator {
 
   async validateWord(word) {
     try {
-      // For demo purposes, we'll use a simple validation
-      // In production, you should get a real Wordnik API key
-      if (this.apiKey === 'demo') {
-        return this.validateWordOffline(word);
-      }
-
-      const response = await axios.get(
-        `${this.baseUrl}/word.json/${word}/definitions`,
-        {
-          params: {
-            api_key: this.apiKey,
-            limit: 1
-          },
-          timeout: 5000
-        }
-      );
-
-      return response.data && response.data.length > 0;
+      // Using only offline validation for now
+      return this.validateWordOffline(word);
     } catch (error) {
       console.error('Word validation error:', error.message);
-      // Fallback to offline validation
-      return this.validateWordOffline(word);
+      return false;
     }
   }
 
@@ -54,8 +37,8 @@ class WordValidator {
       return false;
     }
     
-    // For demo purposes, accept most reasonable-looking words
-    return true;
+    // Only accept words from our common words list
+    return false; // If we got here, the word is not in our common words list
   }
 }
 

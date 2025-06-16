@@ -42,11 +42,9 @@ export default function PlayerList({ players, currentPlayerId }: PlayerListProps
                 {Array.from({ length: 3 }, (_, i) => (
                   <span
                     key={i}
-                    className={`text-lg ${
-                      i < player.lives ? 'text-red-500' : 'text-gray-300'
-                    }`}
+                    className="text-lg"
                   >
-                    ❤️
+                    {i < player.lives ? '❤️' : '🖤'}
                   </span>
                 ))}
               </div>

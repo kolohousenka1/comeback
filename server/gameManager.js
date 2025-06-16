@@ -161,8 +161,17 @@ class GameManager {
           }
         }
         
-        this.nextTurn(roomId);
+        // Clear current timer
         clearInterval(room.turnTimer);
+        room.turnTimer = null;
+        
+        // Move to next player
+        this.nextTurn(roomId);
+        
+        // Immediately start a new timer for the next player
+        setTimeout(() => {
+          this.startTurnTimer(roomId, callback);
+        }, 100);
       }
       
       callback(room.gameState);
@@ -177,6 +186,7 @@ class GameManager {
     if (activePlayers.length <= 1) {
       if (room.turnTimer) {
         clearInterval(room.turnTimer);
+        room.turnTimer = null;
       }
       return activePlayers.length === 1 ? activePlayers[0].id : null;
     }

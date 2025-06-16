@@ -63,6 +63,13 @@ io.on('connection', (socket) => {
     });
     
     if (result.success) {
+      // Clear any existing timer first
+      const room = gameManager.rooms.get(roomId);
+      if (room && room.turnTimer) {
+        clearInterval(room.turnTimer);
+        room.turnTimer = null;
+      }
+      
       const gameState = gameManager.getGameState(roomId);
       io.to(roomId).emit('gameStateUpdate', gameState);
       
